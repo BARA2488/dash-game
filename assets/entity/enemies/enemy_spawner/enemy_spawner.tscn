@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://ceecc2vuyxvrv"]
+
+[ext_resource type="Script" uid="uid://dsyhdw4o1hx46" path="res://assets/entity/enemies/enemy_spawner/enemy_spawner.gd" id="1_585df"]
+[ext_resource type="Texture2D" uid="uid://b3jqpnlt76fwm" path="res://assets/entity/enemies/enemy_spawner/warning_center.png" id="1_twgpm"]
+[ext_resource type="Texture2D" uid="uid://drj6ts0o7vmfi" path="res://assets/entity/enemies/enemy_spawner/warning_body.png" id="2_585df"]
+
+[sub_resource type="Animation" id="Animation_ydq3d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pjwuj"]
+resource_name = "warning_s"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xwrr"]
+_data = {
+&"RESET": SubResource("Animation_ydq3d"),
+&"warning_s": SubResource("Animation_pjwuj")
+}
+
+[sub_resource type="Animation" id="Animation_fgca6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_431s8"]
+resource_name = "warning_roll"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5707964]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7pr3m"]
+_data = {
+&"RESET": SubResource("Animation_fgca6"),
+&"warning_roll": SubResource("Animation_431s8")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_585df")
+
+[node name="warn_center" type="Sprite2D" parent="."]
+texture = ExtResource("1_twgpm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="warn_center"]
+libraries = {
+&"": SubResource("AnimationLibrary_0xwrr")
+}
+
+[node name="Warning" type="Sprite2D" parent="."]
+texture = ExtResource("2_585df")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Warning"]
+libraries = {
+&"": SubResource("AnimationLibrary_7pr3m")
+}

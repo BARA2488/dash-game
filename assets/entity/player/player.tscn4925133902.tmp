@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://dydf3pfasr3ta"]
+
+[ext_resource type="Texture2D" uid="uid://bxrojqfid8smp" path="res://assets/entity/player/player.png" id="1_1ii4y"]
+[ext_resource type="Script" uid="uid://be13to0ykmcin" path="res://assets/entity/player/player.gd" id="1_swryv"]
+[ext_resource type="PackedScene" uid="uid://yub6f58nj6dx" path="res://assets/entity/bullets/bullet_1/bullet.tscn" id="2_fkda7"]
+[ext_resource type="Texture2D" uid="uid://du2nhg8ojjp7x" path="res://assets/entity/player/metka.png" id="3_mdtq0"]
+[ext_resource type="Texture2D" uid="uid://cdkgxe3nlwqfs" path="res://assets/entity/player/handle.png" id="4_4bvld"]
+[ext_resource type="Shader" uid="uid://dllj378rmnclc" path="res://assets/shaders/monitor_shader.gdshader" id="4_18nrk"]
+[ext_resource type="Texture2D" uid="uid://bthfqq01xm4oe" path="res://assets/entity/weapons/pistol.png" id="5_fiy51"]
+[ext_resource type="PackedScene" uid="uid://b2mt8el4ycmrk" path="res://assets/entity/player/debug_scene.tscn" id="5_m8dpi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_swryv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m8dpi"]
+shader = ExtResource("4_18nrk")
+shader_parameter/line_density = 800.0
+shader_parameter/line_intensity = 0.15
+shader_parameter/line_speed = 0.0
+shader_parameter/vignette_strength = 0.9
+shader_parameter/vignette_softness = 0.6
+shader_parameter/vignette_center = Vector2(0.5, 0.5)
+shader_parameter/vignette_aspect = 1.0
+
+[node name="player" type="CharacterBody2D"]
+physics_interpolation_mode = 1
+script = ExtResource("1_swryv")
+bullet_scene = ExtResource("2_fkda7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_swryv")
+
+[node name="main_sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_1ii4y")
+
+[node name="head_marker" type="Sprite2D" parent="main_sprite"]
+texture = ExtResource("3_mdtq0")
+
+[node name="pistol" type="Sprite2D" parent="main_sprite/head_marker"]
+position = Vector2(13, 0)
+texture = ExtResource("5_fiy51")
+
+[node name="bullet_spawner" type="Sprite2D" parent="main_sprite/head_marker"]
+position = Vector2(14, 0)
+texture = ExtResource("4_4bvld")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="monitor_shader" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="monitor_shader"]
+material = SubResource("ShaderMaterial_m8dpi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugScene" parent="." instance=ExtResource("5_m8dpi")]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckp54emfm6lyn"]
+
+[ext_resource type="Script" uid="uid://c8riitvugxyi1" path="res://assets/entity/enemies/pink_enemy/enemy_4/pink_enemy_4.gd" id="1_idvk0"]
+[ext_resource type="Texture2D" uid="uid://cc5lkx6kv8gjx" path="res://assets/entity/enemies/pink_enemy/enemy_4/pink_enemy_4.png" id="2_ctxx2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_68hjh"]
+radius = 14.0
+
+[node name="pink_enemy_4" type="CharacterBody2D"]
+script = ExtResource("1_idvk0")
+
+[node name="main_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_68hjh")
+
+[node name="main_sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_ctxx2")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

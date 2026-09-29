@@ -1,0 +1,54 @@
+[gd_scene format=4 uid="uid://dhojbfdgbvufy"]
+
+[ext_resource type="Texture2D" uid="uid://bx04oad31mjt4" path="res://tiles/basic_tileset.png" id="1_ysrp0"]
+[ext_resource type="Texture2D" uid="uid://kgjconry0xjo" path="res://tiles/plitka.png" id="2_6eldl"]
+[ext_resource type="Texture2D" uid="uid://f3xgb5qqw1yv" path="res://tiles/wall.png" id="3_8xurw"]
+[ext_resource type="PackedScene" uid="uid://dydf3pfasr3ta" path="res://assets/entity/player/player.tscn" id="4_n8ovw"]
+[ext_resource type="PackedScene" uid="uid://dpe15gk13n7hr" path="res://assets/entity/circle_teleport/circle_teleport.tscn" id="5_6eldl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nwmoi"]
+texture = ExtResource("1_ysrp0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ace7m"]
+texture = ExtResource("2_6eldl")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trs84"]
+texture = ExtResource("3_8xurw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_h1qs5"]
+tile_size = Vector2i(32, 32)
+sources/2 = SubResource("TileSetAtlasSource_nwmoi")
+sources/3 = SubResource("TileSetAtlasSource_ace7m")
+sources/4 = SubResource("TileSetAtlasSource_trs84")
+
+[sub_resource type="Environment" id="Environment_0is01"]
+background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 0.5
+tonemap_white = 0.33
+glow_enabled = true
+glow_normalized = true
+glow_bloom = 1.0
+
+[node name="Hub" type="Node2D" unique_id=658597937]
+
+[node name="BasicLayer" type="TileMapLayer" parent="." unique_id=2098246511]
+tile_map_data = PackedByteArray("AAD//wAAAgAAAAEAAAD+/wAAAwAAAAAAAAD+////AwAAAAAAAAD/////AgAAAAAAAAD+//7/AwAAAAAAAAD///7/AwAAAAAAAAAAAP7/AwAAAAAAAAAAAP//AgABAAAAAAABAP//AwAAAAAAAAABAP7/AwAAAAAAAAABAAAAAwAAAAAAAAAAAAAAAgABAAEAAAAAAAEAAwAAAAAAAAABAAEAAwAAAAAAAAD//wEAAwAAAAAAAAD+/wEAAwAAAAAAAAD9/wIAAwAAAAAAAAD9/wEAAwAAAAAAAAD9/wAAAwAAAAAAAAD9////AwAAAAAAAAD9//7/AwAAAAAAAAD9//3/AwAAAAAAAAD+//3/AwAAAAAAAAD///3/AwAAAAAAAAAAAP3/AwAAAAAAAAABAP3/AwAAAAAAAAACAP3/AwAAAAAAAAACAP7/AwAAAAAAAAACAP//AwAAAAAAAAACAAAAAwAAAAAAAAACAAEAAwAAAAAAAAACAAIAAwAAAAAAAAABAAIAAwAAAAAAAAAAAAIAAwAAAAAAAAD//wIAAwAAAAAAAAD+/wIAAwAAAAAAAAD8/wMABAAAAAAAAAD9/wMABAAAAAAAAAD+/wMABAAAAAAAAAD//wMABAAAAAAAAAAAAAMABAAAAAAAAAABAAMABAAAAAAAAAACAAMABAAAAAAAAAADAAMABAAAAAAAAAADAAIABAAAAAAAAAADAAEABAAAAAAAAAADAAAABAAAAAAAAAADAP//BAAAAAAAAAADAP7/BAAAAAAAAAADAP3/BAAAAAAAAAADAPz/BAAAAAAAAAACAPz/BAAAAAAAAAABAPz/BAAAAAAAAAAAAPz/BAAAAAAAAAD///z/BAAAAAAAAAD+//z/BAAAAAAAAAD9//z/BAAAAAAAAAD8//z/BAAAAAAAAAD8//3/BAAAAAAAAAD8//7/BAAAAAAAAAD8////BAAAAAAAAAD8/wAABAAAAAAAAAD8/wEABAAAAAAAAAD8/wIABAAAAAAAAAA=")
+tile_set = SubResource("TileSet_h1qs5")
+
+[node name="player" parent="." unique_id=1385204908 instance=ExtResource("4_n8ovw")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=884134420]
+environment = SubResource("Environment_0is01")
+
+[node name="circle-teleport2" parent="." unique_id=1784758855 instance=ExtResource("5_6eldl")]
+scene_root = "res://assets/scenes/main_scene/main_scene.tscn"

@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://yub6f58nj6dx"]
+
+[ext_resource type="Texture2D" uid="uid://cme4wvwc8a0ro" path="res://assets/entity/bullets/bullet_1/пуля.png" id="1_dlkdr"]
+[ext_resource type="Script" uid="uid://61565mi2085f" path="res://assets/entity/bullets/bullet_1/bullet.gd" id="1_fe06q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe06q"]
+size = Vector2(11, 2)
+
+[sub_resource type="Gradient" id="Gradient_1g6eg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ejvo1"]
+gradient = SubResource("Gradient_1g6eg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_akj5p"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 90.0
+initial_velocity_max = 47.1
+gravity = Vector3(0, 0, 0)
+scale_over_velocity_min = 14.49
+scale_over_velocity_max = 72.46
+color_ramp = SubResource("GradientTexture1D_ejvo1")
+
+[node name="bullet" type="Area2D"]
+physics_interpolation_mode = 1
+script = ExtResource("1_fe06q")
+
+[node name="bullet_collision" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_fe06q")
+
+[node name="bullet_sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_dlkdr")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(4, 0)
+emitting = false
+amount = 6
+lifetime = 0.37
+one_shot = true
+speed_scale = 7.46
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_akj5p")
